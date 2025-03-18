@@ -27,8 +27,9 @@ export default function App() {
   const DEFAULT_CONFIG = blankConfig.map((widget) => {
     return { ...widget, positionData: { ...widget.positionData } };
   });
-  const savedConfig = localStorage.getItem("widgetConfig");
+
   const [widgetConfig, setWidgetConfig] = useState(() => {
+    const savedConfig = localStorage.getItem("widgetConfig");
     return savedConfig ? JSON.parse(savedConfig) : DEFAULT_CONFIG;
   });
   const [saveRequested, setSaveRequested] = useState(false);
