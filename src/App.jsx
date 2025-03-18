@@ -28,11 +28,15 @@ export default function App() {
     return { ...widget, positionData: { ...widget.positionData } };
   });
 
-  const [widgetConfig, setWidgetConfig] = useState(() => {
-    const savedConfig = localStorage.getItem("widgetConfig");
-    return savedConfig ? JSON.parse(savedConfig) : DEFAULT_CONFIG;
-  });
+  const [widgetConfig, setWidgetConfig] = useState([]);
   const [saveRequested, setSaveRequested] = useState(false);
+
+  useEffect(() => {
+    const savedConfig = localStorage.getItem("widgetConfig");
+    savedConfig
+      ? setWidgetConfig(JSON.parse(savedConfig))
+      : setWidgetConfig(DEFAULT_CONFIG);
+  }, []);
 
   function save() {
     setSaveRequested(true);
